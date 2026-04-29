@@ -16,11 +16,12 @@ let progress = {
   code3: false
 };
 
-function unlockModule(id, link) {
+function unlockModule(id, link, label) {
   const el = document.getElementById(id);
+
   el.classList.remove("locked");
-  el.classList.add("unlocked");
-  el.innerHTML = `<a href="${link}" target="_blank">${el.textContent.replace(" 🔒","")}</a>`;
+
+  el.innerHTML = `<a href="${link}" target="_blank">${label}</a>`;
 }
 
 function checkCode() {
@@ -28,23 +29,28 @@ function checkCode() {
   const response = document.getElementById("response");
 
   if(code === "0412" && !progress.code1) {
-    progress.code1 = true;
-    response.innerHTML = "✔ Email Verified → Calendar Unlocked";
+  progress.code1 = true;
+  response.innerHTML = "✔ Email Verified → Calendar Unlocked";
 
-    unlockModule("mod2", "https://your-sharepoint-link/calendar");
+  unlockModule("mod2", "https://your-sharepoint-link/calendar", "[2] Calendar System");
 
-  } else if(code === "19:00" && !progress.code2) {
-    progress.code2 = true;
-    response.innerHTML = "✔ Timeline Verified → Finance Unlocked";
+}
 
-    unlockModule("mod3", "https://your-sharepoint-link/finance");
+  else if(code === "19:00" && !progress.code2) {
+  progress.code2 = true;
+  response.innerHTML = "✔ Timeline Verified → Finance Unlocked";
 
-  } else if(code === "ACCT-7781" && !progress.code3) {
-    progress.code3 = true;
-    response.innerHTML = "✔ Financial Record Verified → HR Unlocked";
+  unlockModule("mod3", "https://your-sharepoint-link/finance", "[3] Financial Records");
 
-    unlockModule("mod4", "https://your-sharepoint-link/hr");
+}
 
+  else if(code === "ACCT-7781" && !progress.code3) {
+  progress.code3 = true;
+  response.innerHTML = "✔ Financial Record Verified → HR Unlocked";
+
+  unlockModule("mod4", "https://your-sharepoint-link/hr", "[4] HR Database");
+
+}
   } else if(code === "SILENTDIRECTIVE") {
 
     if(progress.code1 && progress.code2 && progress.code3) {
