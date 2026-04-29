@@ -50,59 +50,36 @@ window.onload = function() {
   }
 
   // ===== MAIN FUNCTION =====
-  window.checkCode = function() {
-    const code = document.getElementById("codeInput").value.trim().toUpperCase();
-    const response = document.getElementById("response");
+  document.getElementById("submitBtn").addEventListener("click", function () {
 
-    console.log("CODE:", code);
+  const code = document.getElementById("codeInput").value.trim().toUpperCase();
+  const response = document.getElementById("response");
 
-    if(code === "0412" && !progress.code1) {
-      progress.code1 = true;
-      response.innerHTML = "✔ Calendar Unlocked";
+  console.log("CODE ENTERED:", code);
 
-      unlockModule(
-        "mod2",
-        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgD1SblGIzxNQ6TZ1Foftn-cAcBh_9Al9knRBjzr4f9mEYg?e=MpCGgl",
-        "[2] Calendar System"
-      );
+  if (code === "0412") {
+    response.innerHTML = "✔ Calendar Unlocked";
 
-    } else if(code === "19:00" && !progress.code2) {
-      progress.code2 = true;
-      response.innerHTML = "✔ Finance Unlocked";
+    const el = document.getElementById("mod2");
+    el.classList.remove("locked");
+    el.innerHTML = `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgD1SblGIzxNQ6TZ1Foftn-cAcBh_9Al9knRBjzr4f9mEYg?e=MpCGgl" target="_blank">[2] Calendar System</a>`;
 
-      unlockModule(
-        "mod3",
-        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDgTUmNrPITSrHUUBdY9iJSAQYPRUNoMTiKlcXH1S1AHBs?e=efYdZj",
-        "[3] Financial Records"
-      );
+  } else if (code === "19:00") {
+    response.innerHTML = "✔ Finance Unlocked";
 
-    } else if(code === "ACCT-7781" && !progress.code3) {
-      progress.code3 = true;
-      response.innerHTML = "✔ HR Unlocked";
+    const el = document.getElementById("mod3");
+    el.classList.remove("locked");
+    el.innerHTML = `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDgTUmNrPITSrHUUBdY9iJSAQYPRUNoMTiKlcXH1S1AHBs?e=efYdZj" target="_blank">[3] Financial Records</a>`;
 
-      unlockModule(
-        "mod4",
-        "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDJIhaZCRjAQJWyCGulDOH9Aa3V19mCeqF7ehQZgKj4VDI?e=QdffW7",
-        "[4] HR Database"
-      );
+  } else if (code === "ACCT-7781") {
+    response.innerHTML = "✔ HR Unlocked";
 
-    } else if(code === "SILENTDIRECTIVE") {
+    const el = document.getElementById("mod4");
+    el.classList.remove("locked");
+    el.innerHTML = `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDJIhaZCRjAQJWyCGulDOH9Aa3V19mCeqF7ehQZgKj4VDI?e=QdffW7" target="_blank">[4] HR Database</a>`;
 
-      if(progress.code1 && progress.code2 && progress.code3) {
-        response.innerHTML = "⚠ ACCESS GRANTED...";
-        setTimeout(() => {
-          window.location.href = "puzzles/day1_end.html";
-        }, 1500);
-      } else {
-        response.innerHTML = "✖ INCOMPLETE DATA";
-      }
+  } else {
+    response.innerHTML = "✖ INVALID CODE";
+  }
 
-    } else {
-      response.innerHTML = "✖ INVALID CODE";
-    }
-
-    document.getElementById("codeInput").value = "";
-    updateProgress();
-  };
-
-}
+});
