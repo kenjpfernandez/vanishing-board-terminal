@@ -16,23 +16,36 @@ let progress = {
   code3: false
 };
 
+function unlockModule(id, link) {
+  const el = document.getElementById(id);
+  el.classList.remove("locked");
+  el.classList.add("unlocked");
+  el.innerHTML = `<a href="${link}" target="_blank">${el.textContent.replace(" 🔒","")}</a>`;
+}
+
 function checkCode() {
   const code = document.getElementById("codeInput").value.trim().toUpperCase();
   const response = document.getElementById("response");
 
   if(code === "0412" && !progress.code1) {
     progress.code1 = true;
-    response.innerHTML = "✔ Meeting Code Verified";
-  } 
-  else if(code === "19:00" && !progress.code2) {
+    response.innerHTML = "✔ Email Verified → Calendar Unlocked";
+
+    unlockModule("mod2", "https://your-sharepoint-link/calendar");
+
+  } else if(code === "19:00" && !progress.code2) {
     progress.code2 = true;
-    response.innerHTML = "✔ Timeline Conflict Logged";
-  } 
-  else if(code === "ACCT-7781" && !progress.code3) {
+    response.innerHTML = "✔ Timeline Verified → Finance Unlocked";
+
+    unlockModule("mod3", "https://your-sharepoint-link/finance");
+
+  } else if(code === "ACCT-7781" && !progress.code3) {
     progress.code3 = true;
-    response.innerHTML = "✔ Financial Anomaly Flagged";
-  } 
-  else if(code === "SILENTDIRECTIVE") {
+    response.innerHTML = "✔ Financial Record Verified → HR Unlocked";
+
+    unlockModule("mod4", "https://your-sharepoint-link/hr");
+
+  } else if(code === "SILENTDIRECTIVE") {
 
     if(progress.code1 && progress.code2 && progress.code3) {
       response.innerHTML = "⚠ ACCESS GRANTED...";
@@ -40,12 +53,11 @@ function checkCode() {
         window.location.href = "puzzles/day1_end.html";
       }, 1500);
     } else {
-      response.innerHTML = "✖ INCOMPLETE DATA. MORE EVIDENCE REQUIRED.";
+      response.innerHTML = "✖ INCOMPLETE DATA";
     }
 
-  } 
-  else {
-    response.innerHTML = "✖ INVALID OR ALREADY USED CODE";
+  } else {
+    response.innerHTML = "✖ INVALID CODE";
   }
 
   updateProgress();
