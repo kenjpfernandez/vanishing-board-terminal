@@ -1,0 +1,38 @@
+body {
+background-color: black;
+color: #00ff9f;
+font-family: monospace;
+padding: 20px;
+}
+
+.terminal {
+max-width: 800px;
+margin: auto;
+}
+
+a {
+color: #00ff9f;
+text-decoration: none;
+}
+
+a:hover {
+text-decoration: underline;
+}
+
+.status {
+color: red;
+}
+
+input {
+background: black;
+border: 1px solid #00ff9f;
+color: #00ff9f;
+padding: 5px;
+}
+
+button {
+background: #00ff9f;
+border: none;
+padding: 5px 10px;
+cursor: pointer;
+}
