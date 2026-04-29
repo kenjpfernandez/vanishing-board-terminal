@@ -51,21 +51,21 @@ document.addEventListener("DOMContentLoaded", function () {
       progress.code1 = true;
       response.innerHTML = "✔ Calendar Unlocked";
       document.getElementById("mod2").innerHTML =
-        `<a href="YOUR-DAY2-CALENDAR-LINK" target="_blank">[2] Calendar</a>`;
+        `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDQ1U8qkmbyQZxzf2eDxqYuAT6XdExumNP13Vs0uRa25rs?e=6KQXkV" target="_blank">[2] Calendar</a>`;
     }
 
     else if(code === "18:45") {
       progress.code2 = true;
       response.innerHTML = "✔ Finance Unlocked";
       document.getElementById("mod3").innerHTML =
-        `<a href="YOUR-DAY2-FINANCE-LINK" target="_blank">[3] Finance</a>`;
+        `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDic3qH6l9pQLqSJjVKAcNYAa8JzqpRAYK2Xyygo0pyHyw?e=GUKTb3" target="_blank">[3] Finance</a>`;
     }
 
     else if(code === "ACCT-9913") {
       progress.code3 = true;
       response.innerHTML = "✔ HR Unlocked";
       document.getElementById("mod4").innerHTML =
-        `<a href="YOUR-DAY2-HR-LINK" target="_blank">[4] HR</a>`;
+        `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgCeSvYrR43bQ7svjnIitYKAAd45Hwl_mbLJQyAHwriqWYY?e=YYVySp" target="_blank">[4] HR</a>`;
     }
 
     else if(code === "TRUSTNOTHING") {
