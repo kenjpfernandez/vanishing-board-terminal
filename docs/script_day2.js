@@ -35,7 +35,7 @@ response.innerHTML = "✔ Revised Timeline Accepted → Calendar Unlocked";
 ```
 const el = document.getElementById("mod2");
 el.classList.remove("locked");
-el.innerHTML = `<a href="https://your-day2-calendar-link" target="_blank">[2] Calendar System</a>`;
+el.innerHTML = `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDQ1U8qkmbyQZxzf2eDxqYuAT6XdExumNP13Vs0uRa25rs?e=OYijxa" target="_blank">[2] Calendar System</a>`;
 ```
 
 }
@@ -48,7 +48,7 @@ response.innerHTML = "✔ Clean Time Slot Identified → Finance Unlocked";
 ```
 const el = document.getElementById("mod3");
 el.classList.remove("locked");
-el.innerHTML = `<a href="https://your-day2-finance-link" target="_blank">[3] Financial Records</a>`;
+el.innerHTML = `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDic3qH6l9pQLqSJjVKAcNYAa8JzqpRAYK2Xyygo0pyHyw?e=0rud2P" target="_blank">[3] Financial Records</a>`;
 ```
 
 }
@@ -61,7 +61,7 @@ response.innerHTML = "✔ Escalated Transaction Flagged → HR Unlocked";
 ```
 const el = document.getElementById("mod4");
 el.classList.remove("locked");
-el.innerHTML = `<a href="https://your-day2-hr-link" target="_blank">[4] HR Database</a>`;
+el.innerHTML = `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgCeSvYrR43bQ7svjnIitYKAAd45Hwl_mbLJQyAHwriqWYY?e=nZltWc" target="_blank">[4] HR Database</a>`;
 ```
 
 }
