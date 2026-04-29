@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -10,21 +9,30 @@
       animation: glitch 0.2s infinite;
     }
 
-```
-@keyframes glitch {
-  0% { transform: translate(0,0); }
-  25% { transform: translate(2px,-2px); }
-  50% { transform: translate(-2px,2px); }
-  75% { transform: translate(2px,2px); }
-  100% { transform: translate(0,0); }
-}
+    @keyframes glitch {
+      0% { transform: translate(0,0); }
+      25% { transform: translate(2px,-2px); }
+      50% { transform: translate(-2px,2px); }
+      75% { transform: translate(2px,2px); }
+      100% { transform: translate(0,0); }
+    }
 
-.warning {
-  color: red;
-  margin-top: 20px;
-}
-```
+    .warning {
+      color: red;
+      margin-top: 20px;
+    }
 
+    .next-link {
+      display: block;
+      margin-top: 30px;
+      color: #00ff9f;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .next-link:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -33,9 +41,9 @@
 
   <h1>ACCESS GRANTED</h1>
   <p>> Loading restricted file...</p>
-  <a href="../terminal_day2.html">Proceed to Day 2</a>
 
   <div id="content"></div>
+  <div id="nextPhase"></div>
 
 </div>
 
@@ -102,13 +110,41 @@ function triggerFinal() {
     const finalMsg = document.createElement("p");
     finalMsg.innerHTML = "<br>> You were not supposed to find this.";
     contentDiv.appendChild(finalMsg);
+
+    setTimeout(showNextPhase, 1500);
   }, 1500);
+}
+
+function showNextPhase() {
+
+  // ===== SET DAY 2 UNLOCK TIME =====
+  const unlockTime = new Date();
+  unlockTime.setDate(unlockTime.getDate() + 1);
+  localStorage.setItem("day2Unlock", unlockTime.getTime());
+
+  const container = document.getElementById("nextPhase");
+
+  const p1 = document.createElement("p");
+  p1.innerHTML = "> New directive available.";
+
+  const p2 = document.createElement("p");
+  p2.innerHTML = "> Awaiting investigator input...";
+
+  const link = document.createElement("a");
+  link.href = "../terminal_day2.html";
+  link.className = "next-link";
+  link.innerHTML = "> INITIATE NEXT PHASE";
+
+  container.appendChild(p1);
+  container.appendChild(p2);
+  container.appendChild(document.createElement("br"));
+  container.appendChild(link);
 }
 
 window.onload = () => {
   setTimeout(typeLine, 800);
 };
-  
+
 </script>
 
 </body>
