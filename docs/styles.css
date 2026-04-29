@@ -36,3 +36,11 @@ text-decoration: underline;
 .status {
 color: red;
 }
+
+.locked {
+  color: gray;
+}
+
+.unlocked a {
+  color: #00ff9f;
+}
