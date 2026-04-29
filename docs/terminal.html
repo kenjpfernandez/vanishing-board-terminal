@@ -1,3 +1,97 @@
-<a href="https://yourcompany.sharepoint.com/.../EMAILS" target="_blank">
-  Access Email Archive
-</a>
+<p id="progress">Progress: 0 / 3 Evidence Verified</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ICIU Terminal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="terminal">
+
+  <h1>ICIU INVESTIGATION TERMINAL</h1>
+  <p>Status: <span class="status">BOARD OFFLINE</span></p>
+
+  <p id="teamDisplay"></p>
+  <p id="progress">Progress: 0 / 3 Evidence Verified</p>
+
+  <hr>
+
+  <h2>MODULES</h2>
+  <ul>
+    <li><a href="https://your-sharepoint-link/email" target="_blank">[1] Email Archive</a></li>
+    <li><a href="https://your-sharepoint-link/calendar" target="_blank">[2] Calendar System</a></li>
+    <li><a href="https://your-sharepoint-link/finance" target="_blank">[3] Financial Records</a></li>
+    <li><a href="https://your-sharepoint-link/hr" target="_blank">[4] HR Database</a></li>
+  </ul>
+
+  <hr>
+
+  <h2>ENTER ACCESS CODE</h2>
+
+  <input type="text" id="codeInput" placeholder="Enter code">
+  <button onclick="checkCode()">SUBMIT</button>
+
+  <p id="response"></p>
+
+</div>
+
+<script>
+
+// ===== TEAM DISPLAY =====
+const team = localStorage.getItem("teamName") || "UNKNOWN";
+document.getElementById("teamDisplay").innerHTML = `> Team: ${team}`;
+
+// ===== PROGRESS TRACKING =====
+let progress = {
+  code1: false,
+  code2: false,
+  code3: false
+};
+
+function updateProgress() {
+  const count = Object.values(progress).filter(v => v).length;
+  document.getElementById("progress").innerHTML =
+    `Progress: ${count} / 3 Evidence Verified`;
+}
+
+// ===== CODE SYSTEM =====
+function checkCode() {
+  const code = document.getElementById("codeInput").value.trim().toUpperCase();
+  const response = document.getElementById("response");
+
+  if(code === "0412" && !progress.code1) {
+    progress.code1 = true;
+    response.innerHTML = "✔ Meeting Code Verified";
+
+  } else if(code === "19:00" && !progress.code2) {
+    progress.code2 = true;
+    response.innerHTML = "✔ Timeline Conflict Logged";
+
+  } else if(code === "ACCT-7781" && !progress.code3) {
+    progress.code3 = true;
+    response.innerHTML = "✔ Financial Anomaly Flagged";
+
+  } else if(code === "SILENTDIRECTIVE") {
+
+    if(progress.code1 && progress.code2 && progress.code3) {
+      response.innerHTML = "⚠ ACCESS GRANTED...";
+      setTimeout(() => {
+        window.location.href = "puzzles/day1_end.html";
+      }, 1500);
+    } else {
+      response.innerHTML = "✖ INCOMPLETE DATA. MORE EVIDENCE REQUIRED.";
+    }
+
+  } else {
+    response.innerHTML = "✖ INVALID OR ALREADY USED CODE";
+  }
+
+  updateProgress();
+}
+
+</script>
+
+</body>
+</html>
