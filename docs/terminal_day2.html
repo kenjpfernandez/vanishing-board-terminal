@@ -1,18 +1,19 @@
-<h1>ICIU TERMINAL — DATA INTEGRITY WARNING</h1>
-<p>Status: <span class="status">COMPROMISED</span></p>
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ICIU Terminal</title>
+  <title>ICIU Terminal — Day 2</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <div class="terminal">
 
-  <h1>ICIU INVESTIGATION TERMINAL</h1>
-  <p>Status: <span class="status">BOARD OFFLINE</span></p>
+  <h1>ICIU TERMINAL — DATA INTEGRITY WARNING</h1>
+  <p>Status: <span class="status">COMPROMISED</span></p>
+
+  <p style="color:red;">> WARNING: System logs have been altered.</p>
 
   <p id="teamDisplay"></p>
   <p id="progress">Progress: 0 / 3 Evidence Verified</p>
@@ -22,14 +23,17 @@
   <h2>MODULES</h2>
   <ul>
     <li>
-      <a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDcn2uZdPmwRJZzfYZWHo9CAaN6-Yu3UunFUa79oYt17yg?e=P7qkCH" target="_blank">
-        [1] Email Archive
+      <a href="https://your-day2-email-link" target="_blank">
+        [1] Email Archive (Revised)
       </a>
     </li>
 
-    <li id="mod2" class="locked">[2] Calendar System 🔒</li>
-    <li id="mod3" class="locked">[3] Financial Records 🔒</li>
-    <li id="mod4" class="locked">[4] HR Database 🔒</li>
+```
+<li id="mod2" class="locked">[2] Calendar System 🔒</li>
+<li id="mod3" class="locked">[3] Financial Records 🔒</li>
+<li id="mod4" class="locked">[4] HR Database 🔒</li>
+```
+
   </ul>
 
   <hr>
@@ -43,96 +47,7 @@
 
 </div>
 
-<script>
-
-// ===== TEAM DISPLAY =====
-const team = localStorage.getItem("teamName") || "UNKNOWN";
-const teamEl = document.getElementById("teamDisplay");
-if (teamEl) {
-  teamEl.innerHTML = `> Team: ${team}`;
-}
-
-// ===== PROGRESS =====
-let progress = {
-  code1: false,
-  code2: false,
-  code3: false
-};
-
-function updateProgress() {
-  const el = document.getElementById("progress");
-  if (!el) return;
-
-  const count = Object.values(progress).filter(v => v).length;
-  el.innerHTML = `Progress: ${count} / 3 Evidence Verified`;
-}
-
-// ===== MAIN FUNCTION =====
-function checkCode() {
-  const code = document.getElementById("codeInput").value.trim().toUpperCase();
-  const response = document.getElementById("response");
-
-  console.log("CODE:", code);
-
-  // --- CODE 1 ---
-  if(code === "0412" && !progress.code1) {
-    progress.code1 = true;
-    response.innerHTML = "✔ Meeting Code Verified → Calendar Unlocked";
-
-    const el = document.getElementById("mod2");
-    el.classList.remove("locked");
-    el.innerHTML = `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgD1SblGIzxNQ6TZ1Foftn-cAcBh_9Al9knRBjzr4f9mEYg?e=MpCGgl" target="_blank">[2] Calendar System</a>`;
-
-  }
-
-  // --- CODE 2 ---
-  else if(code === "19:00" && !progress.code2) {
-    progress.code2 = true;
-    response.innerHTML = "✔ Timeline Conflict Logged → Finance Unlocked";
-
-    const el = document.getElementById("mod3");
-    el.classList.remove("locked");
-    el.innerHTML = `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDgTUmNrPITSrHUUBdY9iJSAQYPRUNoMTiKlcXH1S1AHBs?e=efYdZj" target="_blank">[3] Financial Records</a>`;
-
-  }
-
-  // --- CODE 3 ---
-  else if(code === "ACCT-7781" && !progress.code3) {
-    progress.code3 = true;
-    response.innerHTML = "✔ Financial Anomaly Flagged → HR Unlocked";
-
-    const el = document.getElementById("mod4");
-    el.classList.remove("locked");
-    el.innerHTML = `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDJIhaZCRjAQJWyCGulDOH9Aa3V19mCeqF7ehQZgKj4VDI?e=QdffW7" target="_blank">[4] HR Database</a>`;
-
-  }
-
-  // --- FINAL CODE ---
-  else if(code === "SILENTDIRECTIVE") {
-
-    if(progress.code1 && progress.code2 && progress.code3) {
-      response.innerHTML = "⚠ ACCESS GRANTED...";
-      setTimeout(() => {
-        window.location.href = "puzzles/day1_end.html";
-      }, 1500);
-    } else {
-      response.innerHTML = "✖ INCOMPLETE DATA. MORE EVIDENCE REQUIRED.";
-    }
-
-  }
-
-  else {
-    response.innerHTML = "✖ INVALID OR ALREADY USED CODE";
-  }
-
-  // Clear input + update progress
-  document.getElementById("codeInput").value = "";
-  updateProgress();
-}
-
-<p style="color:red;">> WARNING: System logs have been altered.</p>
-  
-</script>
+<script src="script_day2.js"></script>
 
 </body>
 </html>
