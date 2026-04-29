@@ -29,7 +29,7 @@ function unlockModule(id, link, label) {
 }
 
 function checkCode() {
-  const code = document.getElementById("codeInput").value.trim().toUpperCase();
+  const code = document.getElementById("codeInput").value = "";
   const response = document.getElementById("response");
 
   if(code === "0412" && !progress.code1) {
