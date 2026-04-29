@@ -38,7 +38,7 @@ function checkCode() {
 
     unlockModule(
       "mod2",
-      "https://your-sharepoint-link-calendar",
+      "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgD1SblGIzxNQ6TZ1Foftn-cAcBh_9Al9knRBjzr4f9mEYg?e=zDynTx",
       "[2] Calendar System"
     );
 
@@ -48,7 +48,7 @@ function checkCode() {
 
     unlockModule(
       "mod3",
-      "https://your-sharepoint-link-finance",
+      "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDgTUmNrPITSrHUUBdY9iJSAQYPRUNoMTiKlcXH1S1AHBs?e=mmetui",
       "[3] Financial Records"
     );
 
@@ -58,7 +58,7 @@ function checkCode() {
 
     unlockModule(
       "mod4",
-      "https://your-sharepoint-link-hr",
+      "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDJIhaZCRjAQJWyCGulDOH9Aa3V19mCeqF7ehQZgKj4VDI?e=9ucxAV",
       "[4] HR Database"
     );
 
