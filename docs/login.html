@@ -55,6 +55,32 @@ function login() {
   }
 }
 
+  let attempts = 0;
+
+function login() {
+  attempts++;
+
+  const user = document.getElementById("username").value.trim().toUpperCase();
+  const pass = document.getElementById("password").value.trim().toLowerCase();
+  const response = document.getElementById("loginResponse");
+
+  if(user === "ICIU_AGENT" && pass === "directive72") {
+    response.innerHTML = "> ACCESS GRANTED... Redirecting...";
+    setTimeout(() => {
+      window.location.href = "terminal.html";
+    }, 1500);
+
+  } else {
+    response.innerHTML = "> ACCESS DENIED";
+
+    if(attempts >= 2) {
+      setTimeout(() => {
+        response.innerHTML += "<br>> Hint: Check system logs for credential fragments.";
+      }, 1000);
+    }
+  }
+}
+
 </script>
 
 </body>
