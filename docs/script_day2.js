@@ -1,37 +1,34 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-  console.log("Day 2 script loaded");
+  console.log("Day 2 loaded");
 
-  // ===== CHECK UNLOCK =====
+  // 🔐 REQUIRE DAY 1 COMPLETION
+  if (!localStorage.getItem("day1Complete")) {
+    blockAccess(Date.now() + 999999999);
+    return;
+  }
+
   const unlockTime = localStorage.getItem("day2Unlock");
-  console.log("Stored unlockTime:", unlockTime);
 
   if (!unlockTime) {
-    console.log("No unlock time found");
-    blockAccess(Date.now() + 60000); // 1 min fallback
+    blockAccess(Date.now() + 60000);
     return;
   }
 
   const unlock = parseInt(unlockTime);
   const now = Date.now();
 
-  console.log("Now:", now, "Unlock:", unlock);
-
   if (now < unlock) {
-    console.log("Still locked");
     blockAccess(unlock);
     return;
   }
 
-  console.log("Unlocked → running Day 2");
+  console.log("Unlocked → Day 2 active");
 
-  // ===== NORMAL DAY 2 =====
+  // ===== NORMAL GAME =====
 
   const team = localStorage.getItem("teamName") || "UNKNOWN";
-  const teamEl = document.getElementById("teamDisplay");
-  if (teamEl) {
-    teamEl.innerHTML = `> Team: ${team}`;
-  }
+  document.getElementById("teamDisplay").innerHTML = `> Team: ${team}`;
 
   let progress = {
     code1: false,
@@ -40,50 +37,35 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   function updateProgress() {
-    const el = document.getElementById("progress");
-    if (!el) return;
-
     const count = Object.values(progress).filter(v => v).length;
-    el.innerHTML = `Progress: ${count} / 3 Evidence Verified`;
+    document.getElementById("progress").innerHTML =
+      `Progress: ${count} / 3 Evidence Verified`;
   }
 
-  // ===== BUTTON FIX (important) =====
-  const btn = document.querySelector("button");
-
-  if (!btn) {
-    console.error("Button not found!");
-    return;
-  }
-
-  btn.addEventListener("click", function () {
+  document.querySelector("button").addEventListener("click", function () {
 
     const code = document.getElementById("codeInput").value.trim().toUpperCase();
     const response = document.getElementById("response");
 
-    console.log("CODE:", code);
-
     if(code === "0315") {
       progress.code1 = true;
       response.innerHTML = "✔ Calendar Unlocked";
-
       document.getElementById("mod2").innerHTML =
-        `<a href="YOUR-DAY2-CALENDAR-LINK" target="_blank">[2] Calendar System</a>`;
+        `<a href="YOUR-DAY2-CALENDAR-LINK" target="_blank">[2] Calendar</a>`;
     }
 
     else if(code === "18:45") {
       progress.code2 = true;
       response.innerHTML = "✔ Finance Unlocked";
-
       document.getElementById("mod3").innerHTML =
-        `<a href="YOUR-DAY2-FINANCE-LINK" target="_blank">[3] Financial Records</a>`;
+        `<a href="YOUR-DAY2-FINANCE-LINK" target="_blank">[3] Finance</a>`;
     }
 
     else if(code === "ACCT-9913") {
       progress.code3 = true;
       response.innerHTML = "✔ HR Unlocked";
-
       document.getElementById("mod4").innerHTML =
-        `<a href="YOUR-DAY2-HR-LINK" target="_blank">[4] HR Database</a>`;
+        `<a href="YOUR-DAY2-HR-LINK" target="_blank">[4] HR</a>`;
     }
 
     else if(code === "TRUSTNOTHING") {
@@ -109,28 +91,28 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-// ===== LOCK SCREEN =====
+// 🔒 LOCK SYSTEM
 function blockAccess(unlockTime) {
 
   function render() {
-    const now = Date.now();
-    const remaining = unlockTime - now;
+    const remaining = unlockTime - Date.now();
 
     if (remaining <= 0) {
       location.reload();
       return;
     }
 
-    const hours = Math.floor(remaining / (1000 * 60 * 60));
-    const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+    const h = Math.floor(remaining / 3600000);
+    const m = Math.floor((remaining % 3600000) / 60000);
+    const s = Math.floor((remaining % 60000) / 1000);
 
     document.body.innerHTML = `
       <div class="terminal">
         <h1>ACCESS RESTRICTED</h1>
         <p>> Authorization denied</p>
         <p>> Next phase unlock in:</p>
-        <h2>${hours}h ${minutes}m ${seconds}s</h2>
+        <h2>${h}h ${m}m ${s}s</h2>
+        <p>> Do not attempt repeated access.</p>
       </div>
     `;
   }
