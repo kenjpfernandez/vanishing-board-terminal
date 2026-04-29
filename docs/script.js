@@ -74,7 +74,7 @@ function checkCode() {
     "https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDJIhaZCRjAQJWyCGulDOH9Aa3V19mCeqF7ehQZgKj4VDI?e=QdffW7",
     "[4] HR Database"
   );
-    
+}    
   } else if(code === "SILENTDIRECTIVE") {
 
     if(progress.code1 && progress.code2 && progress.code3) {
