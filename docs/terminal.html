@@ -20,7 +20,7 @@
   <h2>MODULES</h2>
   <ul>
     <li>
-      <a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDul-KaeMtoR7XNuoaOUoTBATqUcOdVruuvDyhahRoPSMc?e=qOmXqj" target="_blank">
+      <a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDul-KaeMtoR7XNuoaOUoTBATqUcOdVruuvDyhahRoPSMc?e=hQ8lco" target="_blank">
         [1] Email Archive
       </a>
     </li>
@@ -35,100 +35,13 @@
   <h2>ENTER ACCESS CODE</h2>
 
   <input type="text" id="codeInput" placeholder="Enter code">
-  <button onclick="checkCode()">SUBMIT</button>
+  <button>SUBMIT</button>
 
   <p id="response"></p>
 
 </div>
 
-<script src="script_day1.js">
-  
-// ===== TEAM DISPLAY =====
-const team = localStorage.getItem("teamName") || "UNKNOWN";
-const teamEl = document.getElementById("teamDisplay");
-if (teamEl) {
-  teamEl.innerHTML = `> Team: ${team}`;
-}
-
-// ===== PROGRESS =====
-let progress = {
-  code1: false,
-  code2: false,
-  code3: false
-};
-
-function updateProgress() {
-  const el = document.getElementById("progress");
-  if (!el) return;
-
-  const count = Object.values(progress).filter(v => v).length;
-  el.innerHTML = `Progress: ${count} / 3 Evidence Verified`;
-}
-
-// ===== MAIN FUNCTION =====
-function checkCode() {
-  const code = document.getElementById("codeInput").value.trim().toUpperCase();
-  const response = document.getElementById("response");
-
-  console.log("CODE:", code);
-
-  // --- CODE 1 ---
-  if(code === "0412" && !progress.code1) {
-    progress.code1 = true;
-    response.innerHTML = "✔ Meeting Code Verified → Calendar Unlocked";
-
-    const el = document.getElementById("mod2");
-    el.classList.remove("locked");
-    el.innerHTML = `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgD1SblGIzxNQ6TZ1Foftn-cAcBh_9Al9knRBjzr4f9mEYg?e=MpCGgl" target="_blank">[2] Calendar System</a>`;
-
-  }
-
-  // --- CODE 2 ---
-  else if(code === "19:00" && !progress.code2) {
-    progress.code2 = true;
-    response.innerHTML = "✔ Timeline Conflict Logged → Finance Unlocked";
-
-    const el = document.getElementById("mod3");
-    el.classList.remove("locked");
-    el.innerHTML = `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDgTUmNrPITSrHUUBdY9iJSAQYPRUNoMTiKlcXH1S1AHBs?e=efYdZj" target="_blank">[3] Financial Records</a>`;
-
-  }
-
-  // --- CODE 3 ---
-  else if(code === "ACCT-7781" && !progress.code3) {
-    progress.code3 = true;
-    response.innerHTML = "✔ Financial Anomaly Flagged → HR Unlocked";
-
-    const el = document.getElementById("mod4");
-    el.classList.remove("locked");
-    el.innerHTML = `<a href="https://thermofisher-my.sharepoint.com/:f:/p/kennethjay_fernandez/IgDJIhaZCRjAQJWyCGulDOH9Aa3V19mCeqF7ehQZgKj4VDI?e=QdffW7" target="_blank">[4] HR Database</a>`;
-
-  }
-
-  // --- FINAL CODE ---
-  else if(code === "SILENTDIRECTIVE") {
-
-    if(progress.code1 && progress.code2 && progress.code3) {
-      response.innerHTML = "⚠ ACCESS GRANTED...";
-      setTimeout(() => {
-        window.location.href = "puzzles/day1_end.html";
-      }, 1500);
-    } else {
-      response.innerHTML = "✖ INCOMPLETE DATA. MORE EVIDENCE REQUIRED.";
-    }
-
-  }
-
-  else {
-    response.innerHTML = "✖ INVALID OR ALREADY USED CODE";
-  }
-
-  // Clear input + update progress
-  document.getElementById("codeInput").value = "";
-  updateProgress();
-}
-
-</script>
+<script src="script_day1.js"></script>
 
 </body>
 </html>
