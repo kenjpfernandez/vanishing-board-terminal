@@ -1,7 +1,3 @@
-// ===============================
-// DAY 3 SCRIPT (FINAL VERSION)
-// ===============================
-
 document.addEventListener("DOMContentLoaded", function () {
 
 console.log("Day 3 script loaded");
