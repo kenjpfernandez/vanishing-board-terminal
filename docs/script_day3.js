@@ -62,42 +62,60 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 // ===== MAIN SUBMIT FUNCTION =====
-
 function handleSubmit() {
 
   console.log("Submit triggered");
 
   const inputEl = document.getElementById("codeInput");
   const response = document.getElementById("response");
+  const btn = document.querySelector("button");
 
-  if (!inputEl || !response) {
-    console.error("Missing input or response element");
+  if (!inputEl || !response || !btn) {
+    console.error("Missing elements");
     return;
   }
 
   const code = inputEl.value.trim().toUpperCase();
-
   console.log("Input received:", code);
 
+  let resultType = null;
+
   if (code === "EXEC-04") {
-    win("individual");
+    resultType = "individual";
   }
   else if (code === "APPROVEDALL") {
-    win("collective");
+    resultType = "collective";
   }
   else if (code === "SYSTEMBREACH") {
-    win("system");
+    resultType = "system";
   }
   else {
     response.innerHTML = "✖ INVALID CONCLUSION";
+    return;
   }
 
-  inputEl.value = "";
+  // 🔥 Disable input immediately
+  inputEl.disabled = true;
+  btn.disabled = true;
+
+  // 🔥 Cinematic system response
+  response.innerHTML = "> Processing conclusion...";
+
+  setTimeout(() => {
+    response.innerHTML += "<br>> Validating evidence...";
+  }, 1000);
+
+  setTimeout(() => {
+    response.innerHTML += "<br>> Finalizing decision...";
+  }, 2000);
+
+  setTimeout(() => {
+    win(resultType);
+  }, 3000);
 }
 
 
 // ===== WIN HANDLER =====
-
 function win(type) {
 
   console.log("Winning path:", type);
@@ -117,6 +135,7 @@ function win(type) {
     target = "puzzles/day3_system.html";
   }
 
+  // slight delay already handled above
   window.location.href = target;
 }
 
