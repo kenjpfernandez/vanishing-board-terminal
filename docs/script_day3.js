@@ -1,135 +1,175 @@
+// ===============================
+// DAY 3 SCRIPT (FINAL VERSION)
+// ===============================
+
 document.addEventListener("DOMContentLoaded", function () {
 
-  console.log("Day 3 loaded");
+console.log("Day 3 script loaded");
 
-  // ===== LOCK SYSTEM =====
-  if (!localStorage.getItem("day2Complete")) {
-    blockAccess(Date.now() + 999999999);
-    return;
-  }
+// ===== LOCK SYSTEM =====
 
-  const unlockTime = localStorage.getItem("day3Unlock");
+// Prevent skipping Day 2
+if (!localStorage.getItem("day2Complete")) {
+console.log("Blocked: Day 2 not completed");
+blockAccess(Date.now() + 999999999);
+return;
+}
 
-  if (!unlockTime) {
-    blockAccess(Date.now() + 60000);
-    return;
-  }
+// Check unlock timer
+const unlockTime = localStorage.getItem("day3Unlock");
 
-  const unlock = parseInt(unlockTime);
-  const now = Date.now();
+if (!unlockTime) {
+console.log("No unlock time found → fallback lock");
+blockAccess(Date.now() + 60000); // 1 minute fallback
+return;
+}
 
-  if (now < unlock) {
-    blockAccess(unlock);
-    return;
-  }
+const unlock = parseInt(unlockTime);
+const now = Date.now();
 
-  console.log("Unlocked → Day 3 active");
+if (now < unlock) {
+console.log("Still locked until:", unlock);
+blockAccess(unlock);
+return;
+}
 
-  // ===== SAFE TEAM DISPLAY =====
-  const team = localStorage.getItem("teamName") || "UNKNOWN";
-  const teamEl = document.getElementById("teamDisplay");
-  if (teamEl) {
-    teamEl.innerHTML = `> Team: ${team}`;
-  }
+console.log("Unlocked → Day 3 active");
 
-  // ===== BUTTON HANDLING (SAFE) =====
-  const btn = document.querySelector("button");
+// ===== TEAM DISPLAY =====
 
-  if (!btn) {
-    console.error("Submit button not found");
-    return;
-  }
+const team = localStorage.getItem("teamName") || "UNKNOWN";
+const teamEl = document.getElementById("teamDisplay");
 
-  btn.addEventListener("click", handleSubmit);
+if (teamEl) {
+teamEl.innerHTML = `> Team: ${team}`;
+}
 
-  // Optional: Enter key support
-  document.getElementById("codeInput")?.addEventListener("keypress", function(e) {
-    if (e.key === "Enter") handleSubmit();
-  });
+// ===== BUTTON HANDLING =====
+
+const btn = document.querySelector("button");
+
+if (!btn) {
+console.error("Submit button not found");
+return;
+}
+
+btn.addEventListener("click", handleSubmit);
+
+// Allow ENTER key submission
+const inputEl = document.getElementById("codeInput");
+if (inputEl) {
+inputEl.addEventListener("keypress", function (e) {
+if (e.key === "Enter") handleSubmit();
+});
+}
 
 });
 
-
 // ===== MAIN SUBMIT FUNCTION =====
+
 function handleSubmit() {
 
-  console.log("BUTTON CLICKED");
+console.log("Submit triggered");
 
-  const inputEl = document.getElementById("codeInput");
-  const response = document.getElementById("response");
+const inputEl = document.getElementById("codeInput");
+const response = document.getElementById("response");
 
-  if (!inputEl || !response) {
-    console.error("Missing input or response element");
-    return;
-  }
-
-  const code = inputEl.value.trim().toUpperCase();
-
-  console.log("INPUT:", code);
-
-  if (code === "EXEC-04") {
-    win("individual");
-  }
-  else if (code === "APPROVEDALL") {
-    win("collective");
-  }
-  else if (code === "SYSTEMBREACH") {
-    win("system");
-  }
-  else {
-    response.innerHTML = "✖ INVALID CONCLUSION";
-  }
-
-  inputEl.value = "";
+if (!inputEl || !response) {
+console.error("Missing input or response element");
+return;
 }
 
+const code = inputEl.value.trim().toUpperCase();
+
+console.log("Input received:", code);
+
+// ===== VALID PATHS =====
+
+if (code === "EXEC-04") {
+win("individual");
+}
+else if (code === "APPROVEDALL") {
+win("collective");
+}
+else if (code === "SYSTEMBREACH") {
+win("system");
+}
+else {
+response.innerHTML = "✖ INVALID CONCLUSION";
+}
+
+inputEl.value = "";
+}
 
 // ===== WIN HANDLER =====
+
 function win(type) {
 
-  console.log("WIN PATH:", type);
+console.log("Winning path:", type);
 
-  localStorage.setItem("day3Complete", "true");
-  localStorage.setItem("day3Result", type); // track outcome
+// Save results
+localStorage.setItem("day3Complete", "true");
+localStorage.setItem("day3Result", type);
 
-  if (type === "individual") {
-    window.location.href = "puzzles/day3_individual.html";
-  }
-  else if (type === "collective") {
-    window.location.href = "puzzles/day3_collective.html";
-  }
-  else if (type === "system") {
-    window.location.href = "puzzles/day3_system.html";
-  }
+let target = "";
+
+if (type === "individual") {
+target = "puzzles/day3_individual.html";
+}
+else if (type === "collective") {
+target = "puzzles/day3_collective.html";
+}
+else if (type === "system") {
+target = "puzzles/day3_system.html";
 }
 
+// Redirect to corresponding ending
+window.location.href = target;
+}
 
 // ===== LOCK SCREEN =====
+
 function blockAccess(unlockTime) {
 
-  function render() {
-    const remaining = unlockTime - Date.now();
+function render() {
 
-    if (remaining <= 0) {
-      location.reload();
-      return;
-    }
+```
+const remaining = unlockTime - Date.now();
 
-    const h = Math.floor(remaining / 3600000);
-    const m = Math.floor((remaining % 3600000) / 60000);
-    const s = Math.floor((remaining % 60000) / 1000);
+if (remaining <= 0) {
+  location.reload(); // auto-unlock when time is reached
+  return;
+}
 
-    document.body.innerHTML = `
-      <div class="terminal">
-        <h1>ACCESS RESTRICTED</h1>
-        <p>> Final phase locked</p>
-        <p>> Unlock in:</p>
-        <h2>${h}h ${m}m ${s}s</h2>
-        <p>> Do not attempt override.</p>
-      </div>
-    `;
-  }
+const h = Math.floor(remaining / 3600000);
+const m = Math.floor((remaining % 3600000) / 60000);
+const s = Math.floor((remaining % 60000) / 1000);
 
-  render();
-  setInterval(render, 1000);
+document.body.innerHTML = `
+  <div class="terminal">
+    <h1>ACCESS RESTRICTED</h1>
+
+    <p>> Verifying authorization...</p>
+    <p>> Cross-checking records...</p>
+
+    <p style="color:red;">> ERROR: Access denied</p>
+
+    <br>
+
+    <p>> Final phase locked</p>
+    <p>> Unlock in:</p>
+
+    <h2>${h}h ${m}m ${s}s</h2>
+
+    <br>
+
+    <p>> Do not attempt override.</p>
+  </div>
+`;
+```
+
+}
+
+render();
+setInterval(render, 1000);
 }
