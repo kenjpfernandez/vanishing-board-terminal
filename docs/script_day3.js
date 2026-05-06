@@ -2,33 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   console.log("Day 3 script loaded");
 
-  // ===== LOCK SYSTEM =====
-
-  if (!localStorage.getItem("day2Complete")) {
-    console.log("Blocked: Day 2 not completed");
-    blockAccess(Date.now() + 999999999);
-    return;
-  }
-
-  const unlockTime = localStorage.getItem("day3Unlock");
-
-  if (!unlockTime) {
-    console.log("No unlock time found → fallback lock");
-    blockAccess(Date.now() + 60000);
-    return;
-  }
-
-  const unlock = parseInt(unlockTime);
-  const now = Date.now();
-
-  if (now < unlock) {
-    console.log("Still locked until:", unlock);
-    blockAccess(unlock);
-    return;
-  }
-
-  console.log("Unlocked → Day 3 active");
-
   // ===== TEAM DISPLAY =====
 
   const team = localStorage.getItem("teamName") || "UNKNOWN";
