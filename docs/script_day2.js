@@ -2,29 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   console.log("Day 2 loaded");
 
-  // 🔐 REQUIRE DAY 1 COMPLETION
-  if (!localStorage.getItem("day1Complete")) {
-    blockAccess(Date.now() + 999999999);
-    return;
-  }
-
-  const unlockTime = localStorage.getItem("day2Unlock");
-
-  if (!unlockTime) {
-    blockAccess(Date.now() + 60000);
-    return;
-  }
-
-  const unlock = parseInt(unlockTime);
-  const now = Date.now();
-
-  if (now < unlock) {
-    blockAccess(unlock);
-    return;
-  }
-
-  console.log("Unlocked → Day 2 active");
-
   // ===== NORMAL GAME =====
 
   const team = localStorage.getItem("teamName") || "UNKNOWN";
@@ -89,34 +66,3 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
-
-
-// 🔒 LOCK SYSTEM
-function blockAccess(unlockTime) {
-
-  function render() {
-    const remaining = unlockTime - Date.now();
-
-    if (remaining <= 0) {
-      location.reload();
-      return;
-    }
-
-    const h = Math.floor(remaining / 3600000);
-    const m = Math.floor((remaining % 3600000) / 60000);
-    const s = Math.floor((remaining % 60000) / 1000);
-
-    document.body.innerHTML = `
-      <div class="terminal">
-        <h1>ACCESS RESTRICTED</h1>
-        <p>> Authorization denied</p>
-        <p>> Next phase unlock in:</p>
-        <h2>${h}h ${m}m ${s}s</h2>
-        <p>> Do not attempt repeated access.</p>
-      </div>
-    `;
-  }
-
-  render();
-  setInterval(render, 1000);
-}
