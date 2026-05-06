@@ -35,15 +35,6 @@
 
 <script>
 
-// ✅ SET UNLOCK TIME IMMEDIATELY (IMPORTANT FIX)
-function setUnlockTimeOnce() {
-  if (!localStorage.getItem("day2Unlock")) {
-    const unlockTime = new Date();
-    unlockTime.setDate(unlockTime.getDate() + 1);
-    localStorage.setItem("day2Unlock", unlockTime.getTime());
-  }
-}
-
 const lines = [
   "> Project: SILENT DIRECTIVE",
   "> Classification: LEVEL 5",
@@ -134,7 +125,6 @@ function showNextPhase() {
 }
 
 window.onload = () => {
-  setUnlockTimeOnce();   // 🔥 critical fix
   setTimeout(typeLine, 800);
 };
 
