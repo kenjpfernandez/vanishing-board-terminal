@@ -111,13 +111,6 @@ function triggerFinal() {
 // ===== NEXT PHASE (LOCK + LINK) =====
 function showNextPhase() {
 
-  // 🔒 SET DAY 3 LOCK
-  if (!localStorage.getItem("day3Unlock")) {
-    const unlockTime = new Date();
-    unlockTime.setDate(unlockTime.getDate() + 1);
-    localStorage.setItem("day3Unlock", unlockTime.getTime());
-  }
-
   // mark Day 2 complete
   localStorage.setItem("day2Complete", "true");
 
